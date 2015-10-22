@@ -12,6 +12,6 @@ browser.text_field(:id => 'order_email').set('cheezy@foo.com')
 browser.select_list(:id => 'order_pay_type').select('Check')
 browser.button(:value => 'Place Order').click
 
-fail 'Confirmation Message is not as expected' unless browser.text.include? 'Thank you for adopting a puppy!'
+fail 'Confirmation Message is not as expected' unless browser.text.include? 'Thank you adopting a puppy!'
 
 browser.close
