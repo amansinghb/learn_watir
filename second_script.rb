@@ -15,16 +15,17 @@ def continue_adopting_puppies
   @browser.button(:value => 'Adopt Another Puppy').click
 end
 
-def complete_adoption_puppies
+def checkout_wth(name, address, email, pay_type)
   @browser.button(:value => 'Complete the Adoption').click
-end
-
-def place_order
+  @browser.text_field(:id => 'order_name').set(name)
+  @browser.text_field(:id => 'order_address').set(address)
+  @browser.text_field(:id => 'order_email').set(email)
+  @browser.select_list(:id => 'order_pay_type').select(pay_type)
   @browser.button(:value => 'Place Order').click
 end
 
 def verify_page_contains(text)
-  fail 'Confirmation Message is not as expected' unless browser.text.include? text
+  fail unless @browser.text.include? text
 end
 
 def close_browser
@@ -35,11 +36,6 @@ goto_puppy_adoption_site
 adopt_puppy_number 1
 continue_adopting_puppies
 adopt_puppy_number 2
-complete_adoption_puppies
-browser.text_field(:id => 'order_name').set('Cheezy')
-browser.text_field(:id => 'order_address').set('123 Main St.')
-browser.text_field(:id => 'order_email').set('cheezy@foo.com')
-browser.select_list(:id => 'order_pay_type').select('Check')
-place_order
+checkout_wth('Cheezy','123 Main Street','cheezy@foo.com','Check')
 verify_page_contains ('Thank you for adopting a puppy!')
 close_browser
