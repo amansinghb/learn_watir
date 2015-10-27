@@ -1,17 +1,11 @@
 require 'rubygems'
 require 'watir-webdriver'
-browser = Watir::Browser.new :firefox
-browser.goto 'http://puppies.herokuapp.com'
+require_relative 'adoption_helper'
 
-browser.button(:value => 'View Details').click
-browser.button(:value => 'Adopt Me!').click
-browser.button(:value => 'Complete the Adoption').click
-browser.text_field(:id => 'order_name').set('Cheezy')
-browser.text_field(:id => 'order_address').set('123 Main St.')
-browser.text_field(:id => 'order_email').set('cheezy@foo.com')
-browser.select_list(:id => 'order_pay_type').select('Check')
-browser.button(:value => 'Place Order').click
+include AdoptionHelper
 
-fail 'Confirmation Message is not as expected' unless browser.text.include? 'Thank you adopting a puppy!'
-
-browser.close
+goto_puppy_adoption_site
+adopt_puppy_number 1
+checkout_wth('Cheezy','123 Main Street','cheezy@foo.com','Check')
+verify_page_contains ('Thank you for adopting a puppy!')
+close_browser
