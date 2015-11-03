@@ -12,7 +12,7 @@ Scenario: Adopting one puppy
   And I enter "Cheezy" in the name field
   And I enter "123 Main Street" in the address field
   And I enter "cheezy@example.com" in the email field
-  And I select "Credit Card" from the pay with dropdown
+  And I select "Credit card" from the pay with dropdown
   And I click the Place Order button
   Then I should see "Thank you for adopting a puppy!"
 
