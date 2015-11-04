@@ -45,3 +45,15 @@ end
 Then(/^I should see "([^"]*)"$/) do |expected|
   @browser.text.should include expected
 end
+
+Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |arg1, arg2|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |arg1, arg2|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" as the cart total$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
