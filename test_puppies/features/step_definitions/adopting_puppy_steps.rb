@@ -2,8 +2,16 @@ Given(/^I am on the puppy adoption site$/) do
   @browser.goto 'http://puppies.herokuapp.com'
 end
 
-When(/^I click the View Details button$/) do
+When(/^I click the first View Details button$/) do
   @browser.button(:value => 'View Details', :index => -1).click
+end
+
+When(/^I click the Adopt Another Puppy button$/) do
+  @browser.button(:value => 'Adopt Another Puppy').click
+end
+
+When(/^I click the second View Details button$/) do
+  @browser.button(:value => 'View Details', :index => -2).click
 end
 
 When(/^I click the Adopt Me button$/) do
