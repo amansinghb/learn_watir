@@ -46,8 +46,9 @@ Then(/^I should see "([^"]*)"$/) do |expected|
   @browser.text.should include expected
 end
 
-Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |name, line_item|
+  row = (line_item.to_i -1) * 6
+  @browser.table(:index => 0)[row][1].text.should include name
 end
 
 Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |arg1, arg2|
