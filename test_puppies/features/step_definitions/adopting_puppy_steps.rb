@@ -3,7 +3,7 @@ Given(/^I am on the puppy adoption site$/) do
 end
 
 When(/^I click the first View Details button$/) do
-  @browser.button(:value => 'View Details', :index => -1).click
+  @browser.button(:value => 'View Details', :index => 0).click
 end
 
 When(/^I click the Adopt Another Puppy button$/) do
@@ -11,7 +11,7 @@ When(/^I click the Adopt Another Puppy button$/) do
 end
 
 When(/^I click the second View Details button$/) do
-  @browser.button(:value => 'View Details', :index => -2).click
+  @browser.button(:value => 'View Details', :index => 1).click
 end
 
 When(/^I click the Adopt Me button$/) do
@@ -47,14 +47,15 @@ Then(/^I should see "([^"]*)"$/) do |expected|
 end
 
 Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |name, line_item|
-  row = (line_item.to_i -1) * 6
+  row = (line_item.to_i - 1) * 6
   @browser.table(:index => 0)[row][1].text.should include name
 end
 
-Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |subtotal, line_item|
+  row = (line_item.to_i - 1) *6
+  @browser.table(:index => 0)[row][3].text.should include subtotal
 end
 
-Then(/^I should see "([^"]*)" as the cart total$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should see "([^"]*)" as the cart total$/) do |total|
+  @browser.td(:class => 'total_cell').text.should == total
 end
