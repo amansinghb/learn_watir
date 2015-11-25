@@ -46,9 +46,16 @@ Then(/^I should see "([^"]*)"$/) do |expected|
   @browser.text.should include expected
 end
 
+def row_for(line_item)
+  (line_item - 1) * 6
+end
+
+def cart_line_item(line_item)
+  @browser.table(:index => 0) [row_for(line_item)]
+end
+
 Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |name, line_item|
-  row = (line_item.to_i - 1) * 6
-  @browser.table(:index => 0)[row][1].text.should include name
+  cart_line_item(line_item.to_i)[1].text.should include name
 end
 
 Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |subtotal, line_item|
