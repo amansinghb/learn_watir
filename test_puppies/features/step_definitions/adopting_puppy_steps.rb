@@ -16,6 +16,7 @@ end
 
 When(/^I click the Adopt Me button$/) do
   @browser.button(:value => 'Adopt Me!').click
+  @cart = ShoppingCartPage.new(@browser)
 end
 
 When(/^I click the Complete the Adoption button$/) do
@@ -46,23 +47,17 @@ Then(/^I should see "([^"]*)"$/) do |expected|
   @browser.text.should include expected
 end
 
-def row_for(line_item)
-  (line_item - 1) * 6
-end
-
-def cart_line_item(line_item)
-  @browser.table(:index => 0) [row_for(line_item)]
-end
-
 Then(/^I should see "([^"]*)" as the name for line item (\d+)$/) do |name, line_item|
-  cart_line_item(line_item.to_i)[1].text.should include name
+  # cart_line_item(line_item.to_i)[1].text.should include name
+  @car.name_for_line_item(line_item.to_i).should include name
 end
 
 Then(/^I should see "([^"]*)" as the subtotal for line item (\d+)$/) do |subtotal, line_item|
-  row = (line_item.to_i - 1) *6
-  @browser.table(:index => 0)[row][3].text.should include subtotal
+  # cart_line_item(line_item.to_i)[3].text.should ==subtotal
+  @cart.subtotal_for_line_item(line_item.to_i).should == subtotal
 end
 
 Then(/^I should see "([^"]*)" as the cart total$/) do |total|
-  @browser.td(:class => 'total_cell').text.should == total
+  # @browser.td(:class => 'total_cell').text.should == total
+  @cart.cart_total.should == total
 end
